@@ -14,15 +14,41 @@ namespace TestConsoleApp
             Console.WriteLine("This program will compute the sine of a specified angle.");
             Console.WriteLine(" ");
             Console.WriteLine("Enter Degrees: ");
-            double userValue = Convert.ToDouble(Console.ReadLine());
-            //Pass user-entered value to the Sine function to approximate the sine.
-            double value = Sine(userValue);
-            Console.WriteLine("The sine of " + userValue + " is approximately " + value);
+
+            //My first try catch attempt...pretty sure I'm not implementing well
+            try
+            {
+                //Pass user-entered value to the Sine function to approximate the sine.
+                double userValue = Convert.ToDouble(Console.ReadLine());
+                double value = Sine(userValue);
+                Console.WriteLine("The sine of " + userValue + " is approximately " + value);
+                double compSin = Math.Sin(userValue * Math.PI / 180);
+                Console.WriteLine("The sine of " + userValue +" is approximately " + compSin.ToString() + 
+                    "as computed by predefined Math.Sin function, for comparison.");
+                Console.WriteLine("");
+                Console.WriteLine("Would you like to make another calculation?");
+                string response = Console.ReadLine();
+                if (response == "y" || response == "Y")
+                    Main(args);
+                else if (response == "n" || response == "N")
+                    return;
+                else
+                    Console.WriteLine("Don't be a punk. You should have entered Y or N. Goodbye.");
+                string forcewait = Console.ReadLine();
+
+            }
+            catch
+            {
+                string error = "Your input was unexpected. Please enter an integer or decimal angle measurement.";
+                Console.WriteLine(error.ToUpper());
+                Main(args);
+
+            }
 
             //wait for user to hit enter before closing.
-            string forcewait = Console.ReadLine();
+            //string forcewait = Console.ReadLine();
         }
-
+        
         private static double Sine (double input)
         {
             
